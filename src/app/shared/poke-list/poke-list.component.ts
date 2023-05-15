@@ -8,6 +8,7 @@ import {take} from "rxjs";
   styleUrls: ['./poke-list.component.scss']
 })
 export class PokeListComponent implements OnInit{
+  indicesPoke:number[]=[]
 
   constructor(
     private pokemonService:PokeApiService
@@ -19,12 +20,12 @@ export class PokeListComponent implements OnInit{
       (resp)=> {
         console.log("indices: "+resp)
         resp=resp.results
-        /*
         for(let index of resp){
-          console.log(index.url)
+          var indice
+          indice=index.url.split('/')
+          this.indicesPoke.push(indice[6])
         }
-
-         */
+        console.log(this.indicesPoke)
 
 
 
