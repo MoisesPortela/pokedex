@@ -8,8 +8,10 @@ module.exports = {
       'branco': '#FFF',
       'primary':'#262835',
       'secondary':'#ff5473',
+      'cinza': '#EFEFEF',
     },
-    extend: {},
+    extend: {
+    },
   },
   plugins: [],
 }
