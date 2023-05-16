@@ -10,15 +10,18 @@ import {BaseService} from "./base-service.service";
 })
 export class PokeApiService extends BaseService{
 
-  private url:string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100'
+  private url:string = 'https://pokeapi.co/api/v2/pokemon'
   listAllPokemons():Observable<any>{
-    return this.get<any>(`${this.url}`)
+    return this.get<any>(`${this.url}/?offset=0&limit=100`)
   }
   //dar um jeito de pegar o ID da url e jogar na function
   //https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100
   //https://pokeapi.co/api/v2/pokemon/100/
-  listStatusPokemons(url:string):Observable<any> {
-    return this.get<any>(`${url}`)
+  listPokemonById(id:number):Observable<any> {
+    return this.get<any>(`${this.url}/${id}/`)
+  }
+  getPokemonName(id:number):Observable<any>{
+    return this.get<any>(`${this.url}-species/${id}/`)
   }
   /*
   get apiListAllPokemons():Observable<any>{

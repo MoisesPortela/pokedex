@@ -18,36 +18,28 @@ export class PokeListComponent implements OnInit{
   ) {
   }
   ngOnInit(){
-    this.loadPokemonUrl()
-
+    this.loadAllPokemons()
   }
-  loadPokemonUrl(){
+  loadAllPokemons(){
     this.pokemonService.listAllPokemons().pipe(take(1)).subscribe((simpleList)=> {
       simpleList=simpleList.results
       for(let pokemon of simpleList){
-        this.loadPokemonInfo(pokemon.name,pokemon.url)
+        this.loadPokemonById(pokemon.name,pokemon.url)
       }
     })
-
   }
-  loadPokemonInfo(name:string,url:string){
-    this.pokemonService.listStatusPokemons(url).pipe(take(1)).subscribe((info)=>{
+  loadPokemonById(name:string,url:string){
+    const fragmentoUrl=url.split('/')
+    const id=parseInt(fragmentoUrl[6])
+    this.pokemonService.listPokemonById(id).pipe(take(1)).subscribe((info)=>{
       this.setlistaPokemons.push({name:name,status:info})
       this.listaPokemons=this.setlistaPokemons;
     });
   }
-  reloadPokeLista(){
-    this.listaPokemons=this.setlistaPokemons;
-    this.namePokemonFilter=''
-  }
   searchName($event:any) {
-    this.reloadPokeLista()
-    if ($event) {
-      const pokemonNameFilter = this.listaPokemons.filter((resp: any) => {
-        return !resp.name.indexOf($event.toLowerCase());
-      });
-      this.listaPokemons = pokemonNameFilter;
-
-    }
+    const pokemonNameFilter = this.setlistaPokemons.filter((resp: any) => {
+      return !resp.name.indexOf($event.toLowerCase());
+    });
+    this.listaPokemons = pokemonNameFilter;
   }
 }
