@@ -36,21 +36,18 @@ export class PokeListComponent implements OnInit{
       this.listaPokemons=this.setlistaPokemons;
     });
   }
-  //Arrumar essa função
-  searchName($event:any){
-    if($event.length>this.namePokemonFilter.length){
-      this.namePokemonFilter=$event;
-    }else{
-      return;
-    }
-    if($event.length>=this.namePokemonFilter.length) {
+  reloadPokeLista(){
+    this.listaPokemons=this.setlistaPokemons;
+    this.namePokemonFilter=''
+  }
+  searchName($event:any) {
+    this.reloadPokeLista()
+    if ($event) {
       const pokemonNameFilter = this.listaPokemons.filter((resp: any) => {
         return !resp.name.indexOf($event.toLowerCase());
       });
       this.listaPokemons = pokemonNameFilter;
-    }else {
-      this.loadPokemonUrl()
-    }
 
+    }
   }
 }
