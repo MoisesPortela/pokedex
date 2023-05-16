@@ -8,30 +8,30 @@ import {take} from "rxjs";
   styleUrls: ['./poke-list.component.scss']
 })
 export class PokeListComponent implements OnInit{
-  indicesPoke:number[]=[]
+  listaPokemons:{name:string,status:any}[]=[];
 
   constructor(
     private pokemonService:PokeApiService
   ) {
   }
   ngOnInit(){
-    //this.pokemonService.apiListAllPokemons.subscribe(resp=>resp);
-    this.pokemonService.listAllPokemons().pipe(take(1)).subscribe(
-      (resp)=> {
-        console.log("indices: "+resp)
-        resp=resp.results
-        for(let index of resp){
-          var indice
-          indice=index.url.split('/')
-          this.indicesPoke.push(indice[6])
-        }
-        console.log(this.indicesPoke)
+    this.carregarPokemonsSemStatus()
+    console.log("Teste")
 
-
-
-
-      }
-    )
   }
+  carregarPokemonsSemStatus(){
+    this.pokemonService.listAllPokemons().pipe(take(1)).subscribe((resp)=> {
+      resp=resp.results
+      for(let objeto of resp){
+        this.carregarPokemon(objeto.name,objeto.url)
+      }
+      console.log(this.listaPokemons)
+    })
 
+  }
+  carregarPokemon(nome:string,url:string){
+    this.pokemonService.listStatusPokemons(url).pipe(take(1)).subscribe((resp)=>{
+      this.listaPokemons.push({name:nome,status:resp})
+    })
+  }
 }
