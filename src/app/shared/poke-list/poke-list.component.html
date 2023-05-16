@@ -1,6 +1,6 @@
 <!--search-->
 <poke-search (emmitSearch)="searchName($event)" ></poke-search>
-<section class="listagem">
+<section class="listagem" *ngIf="!errorIsTrue">
   <ng-template ngFor let-pokemon  [ngForOf]="listaPokemons">
     <a class="pokemon" [routerLink]="['details',pokemon.status.id]"  *ngIf="pokemon">
       <section class="pokemon__status" >
@@ -16,4 +16,11 @@
       </section>
     </a>
   </ng-template>
+
 </section>
+<img
+  src="assets/error.png"
+  alt="Deu erro na amostragem do pokemon"
+  class="w-[100%]"
+  *ngIf="errorIsTrue"
+>

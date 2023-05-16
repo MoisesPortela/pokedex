@@ -11,7 +11,7 @@ export class PokeListComponent implements OnInit{
 
   private setlistaPokemons:{name:string,status:any}[]=[];
   listaPokemons:{name:string,status:any}[]=[];
-  namePokemonFilter:string='';
+  errorIsTrue:boolean=false;
 
   constructor(
     private pokemonService:PokeApiService
@@ -26,6 +26,8 @@ export class PokeListComponent implements OnInit{
       for(let pokemon of simpleList){
         this.loadPokemonById(pokemon.name,pokemon.url)
       }
+    },error => {
+      this.errorIsTrue=true
     })
   }
   loadPokemonById(name:string,url:string){
@@ -34,6 +36,8 @@ export class PokeListComponent implements OnInit{
     this.pokemonService.listPokemonById(id).pipe(take(1)).subscribe((info)=>{
       this.setlistaPokemons.push({name:name,status:info})
       this.listaPokemons=this.setlistaPokemons;
+    },error => {
+      this.errorIsTrue=true
     });
   }
   searchName($event:any) {

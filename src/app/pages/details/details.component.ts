@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {PokeApiService} from "../../service/poke-api.service";
-import {forkJoin, take} from "rxjs";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-details',
@@ -10,6 +10,8 @@ import {forkJoin, take} from "rxjs";
 })
 export class DetailsComponent implements OnInit{
   public pokemon:any
+  public isLoading:boolean=false;
+  public errorIsTrue:boolean=false;
   constructor(
     private activatedRouter: ActivatedRoute,
     private pokeService: PokeApiService
@@ -26,8 +28,11 @@ export class DetailsComponent implements OnInit{
 
     return forkJoin([pokemon,name]).subscribe((resp)=>{
       this.pokemon=resp;
-      console.log(this.pokemon)
-    })
+      this.isLoading=true;
+    },
+      (error)=>{
+      this.errorIsTrue=true;
+      },);
   }
 
 }

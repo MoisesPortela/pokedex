@@ -1,8 +1,9 @@
 <!--header-->
 <poke-header></poke-header>
 <main class="mt-10 [@media(mt-[0.625rem])]">
-  <section class="relative flex items-end justify-end
-  h-[4.68rem] pr-[1.875rem]">
+  <ng-template [ngIf]="isLoading">
+    <section class="relative flex items-end justify-end
+    h-[4.68rem] pr-[1.875rem]">
     <h1 class="text-branco text-[2rem] capitalize [@media(text-[1.25rem])]">
       {{pokemon[0].name}}
     </h1>
@@ -11,7 +12,7 @@
       {{pokemon[1].names[0].name}}
     </h2>
   </section>
-  <section class="relative [@media(relative)] ">
+    <section class="relative [@media(relative)] ">
     <img class="absolute top-[-5.625rem] left-[1.875rem] max-w-[8.125rem]
     [@media(absolute top-[-5rem] left-[0rem] max-w-[6.25rem])]"
       [src]="pokemon[0].sprites.other.dream_world.front_default"
@@ -39,4 +40,11 @@
       </a>
     </article>
   </section>
+  </ng-template>
+  <img
+    src="assets/error.png"
+    alt="Deu erro na amostragem do pokemon"
+    class="w-[100%]"
+    *ngIf="errorIsTrue"
+  >
 </main>
