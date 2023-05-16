@@ -15,23 +15,22 @@ export class PokeListComponent implements OnInit{
   ) {
   }
   ngOnInit(){
-    this.carregarPokemonsSemStatus()
-    console.log("Teste")
+    this.LoadPokemonUrl()
 
   }
-  carregarPokemonsSemStatus(){
-    this.pokemonService.listAllPokemons().pipe(take(1)).subscribe((resp)=> {
-      resp=resp.results
-      for(let objeto of resp){
-        this.carregarPokemon(objeto.name,objeto.url)
+  LoadPokemonUrl(){
+    this.pokemonService.listAllPokemons().pipe(take(1)).subscribe((simpleList)=> {
+      simpleList=simpleList.results
+      for(let pokemon of simpleList){
+        this.loadPokemonInfo(pokemon.name,pokemon.url)
       }
       console.log(this.listaPokemons)
     })
 
   }
-  carregarPokemon(nome:string,url:string){
-    this.pokemonService.listStatusPokemons(url).pipe(take(1)).subscribe((resp)=>{
-      this.listaPokemons.push({name:nome,status:resp})
+  loadPokemonInfo(name:string,url:string){
+    this.pokemonService.listStatusPokemons(url).pipe(take(1)).subscribe((info)=>{
+      this.listaPokemons.push({name:name,status:info})
     })
   }
 }
