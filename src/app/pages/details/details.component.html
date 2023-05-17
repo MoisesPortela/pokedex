@@ -4,17 +4,17 @@
   <ng-template [ngIf]="isLoading">
     <section class="relative flex items-end justify-end
     h-[4.68rem] pr-[1.875rem]">
-    <h1 class="text-branco text-[2rem] capitalize [@media(text-[1.25rem])]">
+    <h1 class="text-branco text-[2rem] capitalize [@media(text-[1.25rem])] slideInLeft">
       {{pokemon[0].name}}
     </h1>
     <h2 class="absolute font-thin top-0 text-6xl
-    text-[rgba(255,255,255,0.1)] [@media(top-[2.1875rem] text-[1.25rem])]">
+    text-[rgba(255,255,255,0.1)] [@media(top-[2.1875rem] text-[1.25rem])] slideInRight">
       {{pokemon[1].names[0].name}}
     </h2>
   </section>
     <section class="relative [@media(relative)] ">
     <img class="absolute top-[-5.625rem] left-[1.875rem] max-w-[8.125rem]
-    [@media(absolute top-[-5rem] left-[0rem] max-w-[6.25rem])]"
+    [@media(absolute top-[-5rem] left-[0rem] max-w-[6.25rem])] z-50 slideInDown"
       [src]="pokemon[0].sprites.other.dream_world.front_default"
       [alt]="pokemon[0].name"
     >
@@ -22,7 +22,7 @@
       class="flex flex-col justify-between bg-branco min-h-[43.9vh]
       mt-2.5 pt-[6.875rem] pr-[2.1875rem] pb-[1.875rem] rounded-t-[3.125rem]
       rounded-b-none
-      [@media(min-h-[54.7vh pt-[3.125rem]])]">
+      [@media(min-h-[54.7vh pt-[3.125rem]])] z-0 fadeIn">
       <section class="ml-5">
         <h3 class="mb-5 font-bold italic text-[2rem] underline text-secondary">Estatísticas</h3>
         <ol >
