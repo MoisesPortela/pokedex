@@ -9,6 +9,7 @@ module.exports = {
       'primary':'#262835',
       'secondary':'#ff5473',
       'cinza': '#EFEFEF',
+      'primario-complementar': '#959CCF',
     },
     extend: {
     },

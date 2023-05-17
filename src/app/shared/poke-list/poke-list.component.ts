@@ -8,20 +8,25 @@ import {take} from "rxjs";
   styleUrls: ['./poke-list.component.scss']
 })
 export class PokeListComponent implements OnInit{
-
+  private eraselistaPokemons:{name:string,status:any}[]=[];
   private setlistaPokemons:{name:string,status:any}[]=[];
+
   listaPokemons:{name:string,status:any}[]=[];
   errorIsTrue:boolean=false;
+
+  offset!:number
+  newOffset:number=100
 
   constructor(
     private pokemonService:PokeApiService
   ) {
   }
   ngOnInit(){
+    this.offset=0;
     this.loadAllPokemons()
   }
   loadAllPokemons(){
-    this.pokemonService.listAllPokemons().pipe(take(1)).subscribe((simpleList)=> {
+    this.pokemonService.listAllPokemons(this.offset).pipe(take(1)).subscribe((simpleList)=> {
       simpleList=simpleList.results
       for(let pokemon of simpleList){
         this.loadPokemonById(pokemon.name,pokemon.url)
@@ -45,5 +50,9 @@ export class PokeListComponent implements OnInit{
       return !resp.name.indexOf($event.toLowerCase());
     });
     this.listaPokemons = pokemonNameFilter;
+  }
+  btnAvancar(){
+    this.offset+=this.newOffset
+    this.loadAllPokemons();
   }
 }
