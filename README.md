@@ -2,9 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
 
-# Sobre
+# Sobre / About
 
-Pokedex foi um projeto iniciado para estudos angular, seu intuito é trazer uma agenda com pokemons e suas respectivas informações
+Pokedex foi um projeto iniciado para estudos angular, seu intuito é trazer uma agenda com pokemons e suas respectivas informações.
+
 Pokedex was a project started for angular studies, its purpose is to bring an agenda with pokemons and their respective information
 
 ## Development server
